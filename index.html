@@ -1,41 +1,50 @@
-<!-- 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Management</title>
-    
+    <title>Recipe management</title>
 </head>
-<body>
-    <h1>Recipe Management</h1> 
-    <table>
-            <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Ingredients</th>
-                <th>Instructions</th>
-                <th>Cooking Time</th>
-            </tr>
-        <tbody>
-            <!-- Not able to find a way to populate a table from the database -->
-            <!-- this script was provide by the teacher I need to figure out how to make it work. -->
-            
 
-            <!--
-            <script>  
-                fetch("http://localhost:3000/recipes ")
+<body>
+    <div id="recipes">
+        <script>
+            fetch("http://localhost:5000/recipes")
                 .then(response => response.json())
                 .then(data => {
-                // Use the data to display recipes on the page
+                    // Get the container where we'll display recipes
+                    const recipesContainer = document.getElementById("recipes");
+
+                    // Loop through the data and create elements for each recipe
+                    data.forEach(recipe => {
+                        const food = document.createElement("div");
+                        const card = document.createElement("div");
+        
+                        const recipeTitle = document.createElement("h3");
+                        recipeTitle.textContent = recipe.title;
+                        
+                        const recipeIngredients = document.createElement("p");
+                        recipeIngredients.textContent = "Ingredients: " + recipe.ingredients.join(", ");
+
+                        const recipeInstructions = document.createElement("p");
+                        recipeInstructions.textContent = "Instructions: " + recipe.instructions;
+
+                        const recipeCookingTime = document.createElement("p");
+                        recipeCookingTime.textContent = "Cooking Time: " + recipe.cookingTime;
+
+                        card.appendChild(recipeTitle);
+                        card.appendChild(recipeIngredients);
+                        card.appendChild(recipeInstructions);
+                        card.appendChild(recipeCookingTime);
+                        food.appendChild(card);
+                        recipesContainer.appendChild(food);
+                    });
                 })
                 .catch(error => {
-                console.error("Error fetching albums:", error);
+                    console.error("Error fetching recipes:", error);
                 });
-            </script>
-        </tbody>
-    </table>
-    <script src="index.js"></script>
+        </script>
+    </div>
 </body>
 </html>
--->

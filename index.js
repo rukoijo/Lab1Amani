@@ -76,6 +76,12 @@ app.delete('/recipes/:recipeId', async (req, res) => {
     }
 });
 
+//Sends the 'index.html' file as a default response to a call to the root URL
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
+
+//server configuration code, This code is executed when the server starts
 app.listen(PORT, () => {
     console.log(`Server is listening on port ${PORT}`)
 })
